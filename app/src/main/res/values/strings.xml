@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ExchangeCurrency</string>
+    <string name="headerText">Курси валют</string>
+    <string name="privatBank">ПриватБанк</string>
+    <string name="currency">Валюта</string>
+    <string name="purchase">Покупка</string>
+    <string name="sale">Продажа</string>
+    <string name="usd">USD</string>
+    <string name="eur">EUR</string>
+    <string name="nbu">НБУ</string>
+    <string name="rub">RUB</string>
+    <string name="uah">UAH</string>
+    <string name="_00_000">00,000</string>
+    <string name="charts">charts</string>
+    <string name="calendar">calendar</string>
+    <string name="dateValue"><u>01.01.2020</u></string>
+</resources>
