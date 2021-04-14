@@ -3,7 +3,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.exchangecurrency.model.CurrencyNBU" />
+            type="com.example.exchangecurrency.domain.model.CurrencyNBU" />
     </data>
     <RelativeLayout
         android:id="@+id/RelativeLayout"

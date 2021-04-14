@@ -3,12 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data />
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.exchangecurrency.presentation.CurrenciesViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".presentation.MainActivity">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -36,10 +41,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="@dimen/main_margin"
             android:background="@null"
+            android:contentDescription="@string/charts"
             android:src="@drawable/ic_baseline_bar_chart_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/charts" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
@@ -62,10 +67,10 @@
             android:layout_marginTop="56dp"
             android:layout_marginEnd="@dimen/main_margin"
             android:background="@null"
+            android:contentDescription="@string/calendar"
             android:src="@drawable/ic_baseline_calendar_today_24"
             app:layout_constraintEnd_toStartOf="@+id/datePBTextView"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/calendar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/datePBTextView"
@@ -73,7 +78,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
             android:layout_marginEnd="@dimen/main_margin"
-            android:text="@string/dateValue"
+            android:onClick="@{()->viewModel.calendarButtonOnClick(context)}"
+            android:text="@={viewModel.date}"
             android:textColor="@color/yellow"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"

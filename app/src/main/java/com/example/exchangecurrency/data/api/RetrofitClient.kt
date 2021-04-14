@@ -1,4 +1,4 @@
-package com.example.exchangecurrency.api
+package com.example.exchangecurrency.data.api
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -7,9 +7,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    const val BASE_URL_PB: String = "https://api.privatbank.ua/p24api/"
-    const val BASE_URL_NBU: String = "https://bank.gov.ua/NBUStatService/v1/statdirectory/"
-
     private val loggingInterceptor = run {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.apply {

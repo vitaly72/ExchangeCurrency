@@ -1,8 +1,9 @@
-package com.example.exchangecurrency.api
+package com.example.exchangecurrency.data.api
 
-import com.example.exchangecurrency.model.BasePB
-import com.example.exchangecurrency.model.CurrencyPB
-import com.example.exchangecurrency.model.CurrencyNBU
+import com.example.exchangecurrency.domain.model.BasePB
+import com.example.exchangecurrency.domain.model.CurrencyPB
+import com.example.exchangecurrency.domain.model.CurrencyNBU
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

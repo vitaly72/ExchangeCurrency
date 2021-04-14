@@ -1,11 +1,12 @@
-package com.example.exchangecurrency
+package com.example.exchangecurrency.presentation
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.exchangecurrency.R
 import com.example.exchangecurrency.databinding.CurrencyItemBinding
-import com.example.exchangecurrency.model.CurrencyNBU
+import com.example.exchangecurrency.domain.model.CurrencyNBU
 
 class RecyclerAdapter(private val currencies: List<CurrencyNBU>) :
     RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>() {
