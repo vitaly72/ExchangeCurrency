@@ -1,17 +1,17 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">ExchangeCurrency</string>
     <string name="headerText">Курси валют</string>
     <string name="privatBank">ПриватБанк</string>
     <string name="currency">Валюта</string>
     <string name="purchase">Покупка</string>
     <string name="sale">Продажа</string>
-    <string name="usd">USD</string>
-    <string name="eur">EUR</string>
+    <string name="usd" tools:keep="@string/usd">USD</string>
+    <string name="eur" tools:keep="@string/eur">EUR</string>
+    <string name="rub" tools:keep="@string/rub">RUB</string>
+    <string name="uah" tools:keep="@string/uah">UAH</string>
     <string name="nbu">НБУ</string>
-    <string name="rub">RUB</string>
-    <string name="uah">UAH</string>
-    <string name="_00_000">00,000</string>
+    <string name="_00_000" tools:keep="@string/_00_000">00,000</string>
     <string name="charts">charts</string>
     <string name="calendar">calendar</string>
-    <string name="dateValue"><u>01.01.2020</u></string>
+    <string name="dateValue" tools:keep="@string/dateValue"><u>01.01.2020</u></string>
 </resources>

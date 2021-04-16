@@ -1,13 +1,13 @@
 package com.example.exchangecurrency.data.repository
 
 import com.example.exchangecurrency.data.api.CurrencyApi
-import com.example.exchangecurrency.domain.model.BasePB
-import com.example.exchangecurrency.domain.model.CurrencyPB
+import com.example.exchangecurrency.domain.model.ResponsePB
 import com.example.exchangecurrency.domain.repository.ICurrenciesPBRepository
-import retrofit2.Call
+import io.reactivex.Single
 
 class CurrenciesPBRepository(private val currencyApi: CurrencyApi) : ICurrenciesPBRepository {
-    override fun currenciesPB(date: String): Call<BasePB<CurrencyPB>> {
+    override fun currenciesPB(date: String): Single<ResponsePB> {
+//    override fun currenciesPB(date: String): Result<ResponsePB> {
         return currencyApi.currenciesPB(date)
     }
 }

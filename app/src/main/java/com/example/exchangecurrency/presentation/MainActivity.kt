@@ -1,30 +1,31 @@
 package com.example.exchangecurrency.presentation
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
-import android.graphics.Paint
 import android.os.Bundle
-import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.exchangecurrency.R
 import com.example.exchangecurrency.databinding.ActivityMainBinding
-import com.example.exchangecurrency.domain.model.BasePB
-import com.example.exchangecurrency.domain.model.CurrencyNBU
-import com.example.exchangecurrency.domain.model.CurrencyPB
+import com.example.exchangecurrency.domain.model.ResponsePB
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var currentDatePB = SimpleDateFormat("dd.MM.yyyy", Locale.US)
     var currentDateNBU = SimpleDateFormat("yyyyMMdd", Locale.US)
-    var calendar: Calendar? = null
-    private lateinit var currencyList: BasePB<CurrencyPB>
-    private lateinit var currencyNBUList: List<CurrencyNBU>
+    private lateinit var currencyList: ResponsePB
     private lateinit var binding: ActivityMainBinding
     private lateinit var layoutManager: LinearLayoutManager
-    private val currenciesViewModel: CurrenciesViewModel = CurrenciesViewModel()
+//    private val currenciesPBRepository: ICurrenciesPBRepository =
+//        CurrenciesPBRepository(Common.retrofitService)
+//    private val getCurrenciesPBUseCase: IGetCurrenciesPBUseCase =
+//        GetCurrenciesPBUseCase(currenciesPBRepository)
+//    private val currenciesViewModel: CurrenciesViewModel = CurrenciesViewModel(getCurrenciesPBUseCase)
+    private val currenciesViewModel: CurrenciesViewModel by viewModels()
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,9 +33,8 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = currenciesViewModel
         binding.lifecycleOwner = this
-        binding.datePBTextView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
 
-        currenciesViewModel.loadCurrencies(currentDatePB.format(Date()))
+        currenciesViewModel.loadCurrencies()
         currenciesViewModel.currenciesReceivedLiveData.observe(this, {
             it?.let {
                 initAllValuePB(it)
@@ -77,21 +77,10 @@ class MainActivity : AppCompatActivity() {
 //        })
     }
 
-    private fun initAllValuePB(currency: BasePB<CurrencyPB>) {
+    private fun initAllValuePB(currency: ResponsePB) {
         currencyList = currency
-        setValuePB("EUR", binding.eurPurchaseTextView, binding.eurSaleTextView)
-        setValuePB("USD", binding.usdPurchaseTextView, binding.usdSaleTextView)
-        setValuePB("RUB", binding.rubPurchaseTextView, binding.rubSaleTextView)
-    }
-
-    private fun setValuePB(currency: String, purchaseTextView: TextView, saleTextView: TextView) {
-        if (currencyList.exchangeRate.isEmpty()) {
-            purchaseTextView.text = "000"
-            saleTextView.text = "000"
-        } else {
-            val item = currencyList.exchangeRate.find { it.currency == currency }
-            purchaseTextView.text = item?.purchaseRate.toString().substring(0, 6)
-            saleTextView.text = item?.saleRate.toString().substring(0, 6)
-        }
+//        setValuePB("EUR", binding.eurPurchaseTextView, binding.eurSaleTextView)
+//        setValuePB("USD", binding.usdPurchaseTextView, binding.usdSaleTextView)
+//        setValuePB("RUB", binding.rubPurchaseTextView, binding.rubSaleTextView)
     }
 }

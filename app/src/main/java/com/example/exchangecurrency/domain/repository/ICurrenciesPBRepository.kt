@@ -1,10 +1,9 @@
 package com.example.exchangecurrency.domain.repository
 
-import com.example.exchangecurrency.domain.model.BasePB
-import com.example.exchangecurrency.domain.model.CurrencyPB
+import com.example.exchangecurrency.domain.model.ResponsePB
 import io.reactivex.Single
-import retrofit2.Call
 
 interface ICurrenciesPBRepository {
-    fun currenciesPB(date: String): Call<BasePB<CurrencyPB>>
+//    fun currenciesPB(date: String): Result<ResponsePB>
+    fun currenciesPB(date: String): Single<ResponsePB>
 }

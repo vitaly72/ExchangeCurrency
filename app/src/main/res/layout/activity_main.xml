@@ -86,19 +86,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/main_margin"
-            android:layout_marginTop="@dimen/main_margin"
-            android:text="@string/nbu"
-            android:textColor="@color/main"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rubCurrencyLayout" />
-
-        <TextView
             style="@style/text_style_header_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -132,122 +119,49 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             tools:ignore="MissingConstraints" />
 
-        <LinearLayout
+        <include
             android:id="@+id/eurCurrencyLayout"
+            layout="@layout/currency_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/main_margin"
-            android:weightSum="3"
+            app:currency="@{viewModel.currencyEur}"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
-            tools:layout_editor_absoluteX="17dp">
+            tools:layout_editor_absoluteX="@dimen/main_margin" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/eur"
-                android:textAlignment="textStart"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/eurPurchaseTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/_00_000"
-                android:textAlignment="center"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/eurSaleTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/_00_000"
-                android:textAlignment="textEnd"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
+        <include
             android:id="@+id/usdCurrencyLayout"
+            layout="@layout/currency_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/main_margin"
-            android:weightSum="3"
+            app:currency="@{viewModel.currencyUsd}"
             app:layout_constraintTop_toBottomOf="@+id/eurCurrencyLayout"
-            tools:layout_editor_absoluteX="@dimen/main_margin">
+            tools:layout_editor_absoluteX="@dimen/main_margin" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/usd"
-                android:textAlignment="textStart"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/usdPurchaseTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/_00_000"
-                android:textAlignment="center"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/usdSaleTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/_00_000"
-                android:textAlignment="textEnd"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
+        <include
             android:id="@+id/rubCurrencyLayout"
+            layout="@layout/currency_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/main_margin"
-            android:weightSum="3"
+            app:currency="@{viewModel.currencyRub}"
             app:layout_constraintTop_toBottomOf="@+id/usdCurrencyLayout"
-            tools:layout_editor_absoluteX="@dimen/main_margin">
+            tools:layout_editor_absoluteX="@dimen/main_margin" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/rub"
-                android:textAlignment="textStart"
-                android:textSize="25sp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/rubPurchaseTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/_00_000"
-                android:textAlignment="center"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/rubSaleTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/_00_000"
-                android:textAlignment="textEnd"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/main_margin"
+            android:layout_marginTop="@dimen/main_margin"
+            android:text="@string/nbu"
+            android:textColor="@color/main"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rubCurrencyLayout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/nbuCurrenciesRecyclerView"
