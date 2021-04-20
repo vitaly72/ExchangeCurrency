@@ -2,30 +2,21 @@ package com.example.exchangecurrency.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.exchangecurrency.R
 import com.example.exchangecurrency.databinding.ActivityMainBinding
+import com.example.exchangecurrency.domain.model.CurrencyNBU
 import com.example.exchangecurrency.domain.model.ResponsePB
-import dagger.hilt.android.AndroidEntryPoint
+//import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private var currentDatePB = SimpleDateFormat("dd.MM.yyyy", Locale.US)
-    var currentDateNBU = SimpleDateFormat("yyyyMMdd", Locale.US)
-    private lateinit var currencyList: ResponsePB
     private lateinit var binding: ActivityMainBinding
     private lateinit var layoutManager: LinearLayoutManager
-//    private val currenciesPBRepository: ICurrenciesPBRepository =
-//        CurrenciesPBRepository(Common.retrofitService)
-//    private val getCurrenciesPBUseCase: IGetCurrenciesPBUseCase =
-//        GetCurrenciesPBUseCase(currenciesPBRepository)
-//    private val currenciesViewModel: CurrenciesViewModel = CurrenciesViewModel(getCurrenciesPBUseCase)
-    private val currenciesViewModel: CurrenciesViewModel by viewModels()
+    private val currenciesViewModel: CurrenciesViewModel = CurrenciesViewModel()
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,17 +26,10 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         currenciesViewModel.loadCurrencies()
-        currenciesViewModel.currenciesReceivedLiveData.observe(this, {
-            it?.let {
-                initAllValuePB(it)
-            }
+        currenciesViewModel.currencyNBUList.observe(this, {
+            initRecyclerView(it)
         })
 
-//        //nbu list
-//        layoutManager = LinearLayoutManager(this)
-//        binding.nbuCurrenciesRecyclerView.layoutManager = layoutManager
-//        binding.nbuCurrenciesRecyclerView.setHasFixedSize(true)
-//        binding.nbuCurrenciesRecyclerView.isNestedScrollingEnabled = false
 //        //pb item
 //        binding.eurCurrencyLayout.setOnClickListener {
 //            scrollToIndex("EUR")
@@ -58,29 +42,19 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun enqueueCurrencyNBU(date: String) {
-//        val currencyApi = RetrofitClient.retrofitService(RetrofitClient.BASE_URL_NBU)
-//        val currencies: Call<List<CurrencyNBU>> = currencyApi.currenciesNBU(date)
-//
-//        currencies.enqueue(object : Callback<List<CurrencyNBU>> {
-//            override fun onResponse(
-//                call: Call<List<CurrencyNBU>>,
-//                response: Response<List<CurrencyNBU>>
-//            ) {
-//                currencyNBUList = response.body()!!
-//                binding.nbuCurrenciesRecyclerView.adapter = RecyclerAdapter(currencyNBUList)
-//            }
-//
-//            override fun onFailure(call: Call<List<CurrencyNBU>>, t: Throwable) {
-//                println("nbu onFailure: $t")
-//            }
-//        })
+    private fun initRecyclerView(list: List<CurrencyNBU>) {
+        layoutManager = LinearLayoutManager(this)
+        binding.nbuCurrenciesRecyclerView.layoutManager = layoutManager
+        binding.nbuCurrenciesRecyclerView.setHasFixedSize(true)
+        binding.nbuCurrenciesRecyclerView.isNestedScrollingEnabled = false
+        binding.nbuCurrenciesRecyclerView.adapter = RecyclerAdapter(list)
     }
 
-    private fun initAllValuePB(currency: ResponsePB) {
-        currencyList = currency
-//        setValuePB("EUR", binding.eurPurchaseTextView, binding.eurSaleTextView)
-//        setValuePB("USD", binding.usdPurchaseTextView, binding.usdSaleTextView)
-//        setValuePB("RUB", binding.rubPurchaseTextView, binding.rubSaleTextView)
+    fun scrollToIndex(currency: String) {
+//        val item = currencyNBUList.find { it.cc == currency }
+//        val index = currencyNBUList.indexOf(item)
+//        layoutManager.scrollToPositionWithOffset(index, 0)
+//
+//        return index;
     }
 }

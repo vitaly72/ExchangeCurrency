@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/exchangecurrency/presentation/MainActivity.kt" />
+      <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/exchangecurrency/presentation/RecyclerAdapter.kt" />
+    </excludeFromCompile>
     <bytecodeTargetLevel target="11" />
   </component>
 </project>
