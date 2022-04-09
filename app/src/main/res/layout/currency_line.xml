@@ -1,47 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eurCurrencyLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/main_margin"
+    android:weightSum="3">
 
-    <data>
-        <variable
-            name="currency"
-            type="com.example.exchangecurrency.domain.model.CurrencyPB" />
-    </data>
-
-    <LinearLayout
-        android:id="@+id/eurCurrencyLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/main_margin"
-        android:weightSum="3">
+        android:layout_weight="1"
+        android:textAlignment="textStart"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@{currency.component2()}"
-            android:textAlignment="textStart"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/eurPurchaseTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/eurPurchaseTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@{currency.component4().substring(0, 6)}"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/eurSaleTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@{currency.component5().substring(0, 6)}"
-            android:textAlignment="textEnd"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-</layout>
-
+    <TextView
+        android:id="@+id/eurSaleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAlignment="textEnd"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+</LinearLayout>

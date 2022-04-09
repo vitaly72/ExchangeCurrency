@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- ResponsePB application theme. -->
+    <!-- ExchangeEntity application theme. -->
     <style name="Theme.ExchangeCurrency" parent="Theme.MaterialComponents.DayNight.DarkActionBar" tools:keep="@style/Theme_ExchangeCurrency">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>

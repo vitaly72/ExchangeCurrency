@@ -1,34 +1,31 @@
 package com.example.exchangecurrency.presentation
 
-import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.content.Context
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.exchangecurrency.R
 import com.example.exchangecurrency.databinding.ActivityMainBinding
 import com.example.exchangecurrency.domain.model.CurrencyNBU
-import com.example.exchangecurrency.domain.model.ResponsePB
-//import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var layoutManager: LinearLayoutManager
-    private val currenciesViewModel: CurrenciesViewModel = CurrenciesViewModel()
+    private val viewModel: CurrenciesViewModel by viewModels()
 
-    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.viewModel = currenciesViewModel
-        binding.lifecycleOwner = this
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        currenciesViewModel.loadCurrencies()
-        currenciesViewModel.currencyNBUList.observe(this, {
+        viewModel.currencyNBUList.observe(this) {
             initRecyclerView(it)
-        })
+        }
+        binding.datePBTextView.setOnClickListener {
+            calendarButtonOnClick(applicationContext)
+        }
 
 //        //pb item
 //        binding.eurCurrencyLayout.setOnClickListener {
@@ -44,17 +41,32 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerView(list: List<CurrencyNBU>) {
         layoutManager = LinearLayoutManager(this)
-        binding.nbuCurrenciesRecyclerView.layoutManager = layoutManager
-        binding.nbuCurrenciesRecyclerView.setHasFixedSize(true)
-        binding.nbuCurrenciesRecyclerView.isNestedScrollingEnabled = false
-        binding.nbuCurrenciesRecyclerView.adapter = RecyclerAdapter(list)
+        with(binding.nbuCurrenciesRecyclerView) {
+            setHasFixedSize(true)
+            isNestedScrollingEnabled = false
+            adapter = RecyclerAdapter(list)
+        }
     }
 
-    fun scrollToIndex(currency: String) {
-//        val item = currencyNBUList.find { it.cc == currency }
-//        val index = currencyNBUList.indexOf(item)
-//        layoutManager.scrollToPositionWithOffset(index, 0)
-//
-//        return index;
+    private fun calendarButtonOnClick(context: Context) {
+        val calendar: Calendar = Calendar.getInstance()
+
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, monthOfYear)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.US)
+                viewModel.date.value = simpleDateFormat.format(calendar.time)
+                viewModel.loadCurrencies(viewModel.currentDatePB.format(Date()))
+            }
+        val datePickerDialog = DatePickerDialog(
+            context, dateSetListener,
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.datePicker.maxDate = Calendar.getInstance().timeInMillis;
+        datePickerDialog.show()
     }
 }

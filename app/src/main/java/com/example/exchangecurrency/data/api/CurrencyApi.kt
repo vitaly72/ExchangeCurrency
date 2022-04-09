@@ -1,9 +1,8 @@
 package com.example.exchangecurrency.data.api
 
-import com.example.exchangecurrency.domain.model.CurrencyNBU
+import com.example.exchangecurrency.domain.model.CurrenciesNBU
 import com.example.exchangecurrency.domain.model.ResponsePB
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,6 +11,8 @@ interface CurrencyApi {
     fun currenciesPB(@Query("date") date: String): Single<ResponsePB>
 
     @GET("exchange?")
-    fun currenciesNBU(@Query("date") date: String,
-                      @Query("json") json: String = ""): Single<List<CurrencyNBU>>
+    fun currenciesNBU(
+        @Query("date") date: String,
+        @Query("json") json: String = ""
+    ): Single<CurrenciesNBU>
 }

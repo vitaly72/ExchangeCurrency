@@ -1,50 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable
-            name="item"
-            type="com.example.exchangecurrency.domain.model.CurrencyNBU" />
-    </data>
-    <RelativeLayout
-        android:id="@+id/RelativeLayout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="5dp">
+
+    <TextView
+        android:id="@+id/currencyNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/main"
+        android:textSize="16sp" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="5dp">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/currencyNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:id="@+id/uahTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fontFamily="sans-serif-black"
-            android:text="@{item.txt}"
+            android:textAlignment="viewEnd"
             android:textColor="@color/main"
             android:textSize="16sp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/currencyValueTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/uahTextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif-black"
-                android:text="@{String.valueOf(item.rate).concat(`UAH`)}"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/main"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/currencyValueTextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif"
-                android:text="@{item.cc}"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/main"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </RelativeLayout>
-</layout>
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/main"
+            android:textSize="16sp" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,9 +1,17 @@
 package com.example.exchangecurrency.domain.model
 
 data class ResponsePB(
-    var date: String,
-    var bank: String,
-    var baseCurrency: Int,
-    var baseCurrencyLis: String,
-    var exchangeRate: List<CurrencyPB>
+    val date: String,
+    val bank: String,
+    val baseCurrency: Int,
+    val baseCurrencyLis: String,
+    val exchangeRate: List<CurrencyPB>
+)
+
+data class CurrencyPB(
+    val baseCurrency: String,
+    val currency: String,
+    val saleRateNB: String,
+    val saleRate: String,
+    val purchaseRate: String
 )
