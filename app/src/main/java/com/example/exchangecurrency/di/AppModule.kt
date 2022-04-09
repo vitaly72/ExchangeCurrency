@@ -27,7 +27,7 @@ val appModule = module {
         GetCurrenciesUseCase(get())
     }
     viewModel {
-        CurrenciesViewModel(get())
+        CurrenciesViewModel()
     }
 }
 

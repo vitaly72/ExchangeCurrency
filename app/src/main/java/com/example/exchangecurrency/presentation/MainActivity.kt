@@ -7,7 +7,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.exchangecurrency.databinding.ActivityMainBinding
+import com.example.exchangecurrency.databinding.CurrencyLineBinding
+import com.example.exchangecurrency.domain.model.Currency
 import com.example.exchangecurrency.domain.model.CurrencyNBU
+import com.example.exchangecurrency.domain.model.CurrencyPB
+import com.example.exchangecurrency.presentation.extension.observe
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,23 +24,55 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        viewModel.currencyNBUList.observe(this) {
-            initRecyclerView(it)
+        with(viewModel) {
+            observe(currencyEur, ::onCurrencyEur)
+            observe(currencyUsd, ::onCurrencyUsd)
+            observe(currencyRub, ::onCurrencyRub)
         }
-        binding.datePBTextView.setOnClickListener {
-            calendarButtonOnClick(applicationContext)
-        }
+        setListeners()
+    }
 
-//        //pb item
-//        binding.eurCurrencyLayout.setOnClickListener {
-//            scrollToIndex("EUR")
-//        }
-//        binding.usdCurrencyLayout.setOnClickListener {
-//            scrollToIndex("USD")
-//        }
-//        binding.rubCurrencyLayout.setOnClickListener {
-//            scrollToIndex("RUB")
-//        }
+    private fun onCurrencyEur(model: CurrencyPB?) {
+        model ?: return
+
+        onCurrencyLine(model, binding.eurCurrencyLayout)
+    }
+
+    private fun onCurrencyUsd(model: CurrencyPB?) {
+        model ?: return
+
+        onCurrencyLine(model, binding.usdCurrencyLayout)
+    }
+
+    private fun onCurrencyRub(model: CurrencyPB?) {
+        model ?: return
+
+        onCurrencyLine(model, binding.rubCurrencyLayout)
+    }
+
+    private fun onCurrencyLine(model: CurrencyPB, binding: CurrencyLineBinding) {
+        with(binding) {
+            tvCurrency.text = model.saleRateNB
+            eurPurchaseTextView.text = model.purchaseRate.substring(0, 6)
+            tvCurrency.text = model.saleRate.substring(0, 6)
+        }
+    }
+
+    private fun setListeners() {
+        with(binding) {
+            datePBTextView.setOnClickListener {
+                calendarButtonOnClick(applicationContext)
+            }
+            eurCurrencyLayout.root.setOnClickListener {
+                viewModel.scrollToIndex(Currency.EUR)
+            }
+            usdCurrencyLayout.root.setOnClickListener {
+                viewModel.scrollToIndex(Currency.USD)
+            }
+            rubCurrencyLayout.root.setOnClickListener {
+                viewModel.scrollToIndex(Currency.RUB)
+            }
+        }
     }
 
     private fun initRecyclerView(list: List<CurrencyNBU>) {

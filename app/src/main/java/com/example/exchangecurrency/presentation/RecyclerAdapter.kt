@@ -14,6 +14,7 @@ class RecyclerAdapter(private val currencies: List<CurrencyNBU>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = CurrencyItemBinding.inflate(inflater)
+
         return RecyclerViewHolder(binding)
     }
 
@@ -21,21 +22,24 @@ class RecyclerAdapter(private val currencies: List<CurrencyNBU>) :
         holder.bind(currencies[position])
     }
 
-    override fun getItemCount(): Int {
-        return currencies.size
-    }
+    override fun getItemCount(): Int = currencies.size
 
     inner class RecyclerViewHolder(private val binding: CurrencyItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(item: CurrencyNBU) {
-            binding.item = item
-            binding.executePendingBindings()
-            if (currencies.indexOf(item) % 2 != 0) {
-                binding.RelativeLayout.setBackgroundResource(R.color.green_light)
-            } else {
-                binding.RelativeLayout.setBackgroundResource(R.color.white)
+
+            with(binding) {
+                currencyNameTextView.text = item.txt
+                currencyNameTextView.text = root.resources.getString(R.string.uah, item.rate)
+                currencyValueTextView.text = item.cc
+                if (currencies.indexOf(item) % 2 != 0) {
+                    root.setBackgroundResource(R.color.green_light)
+                } else {
+                    root.setBackgroundResource(R.color.white)
+                }
             }
+
         }
     }
 }

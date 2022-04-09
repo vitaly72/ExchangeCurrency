@@ -8,7 +8,7 @@ import io.reactivex.Single
 import org.jetbrains.annotations.NotNull
 
 class CurrenciesRepository constructor(
-    private val currencyApi: CurrencyApi
+    val currencyApi: CurrencyApi
 ) : ICurrenciesRepository {
 
     override fun currenciesPB(@NotNull date: String): Single<ResponsePB> =

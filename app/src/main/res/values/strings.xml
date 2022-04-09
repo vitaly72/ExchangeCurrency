@@ -8,7 +8,7 @@
     <string name="usd" tools:keep="@string/usd">USD</string>
     <string name="eur" tools:keep="@string/eur">EUR</string>
     <string name="rub" tools:keep="@string/rub">RUB</string>
-    <string name="uah" tools:keep="@string/uah">UAH</string>
+    <string name="uah">%1$d UAH</string>
     <string name="nbu">НБУ</string>
     <string name="_00_000" tools:keep="@string/_00_000">00,000</string>
     <string name="charts">charts</string>

@@ -1,11 +1,11 @@
 package com.example.exchangecurrency.domain.usecase
 
-import com.example.exchangecurrency.data.repository.CurrenciesRepository
 import com.example.exchangecurrency.domain.model.CurrencyUiModel
+import com.example.exchangecurrency.domain.repository.ICurrenciesRepository
 import io.reactivex.Single
 
 class GetCurrenciesUseCase constructor(
-    private val currenciesRepository: CurrenciesRepository
+    val currenciesRepository: ICurrenciesRepository
 ) {
     operator fun invoke(date: String): Single<CurrencyUiModel> {
         return Single.zip(
